@@ -2,15 +2,20 @@
 
 import UIKit
 
+func exchange(inout list:[String], i: Int, j: Int) {
+    var temp = list[i]
+    list[i] = list[j]
+    list[j] = temp
+}
+
 func sort(inout list:[String]) {
     let len = list.count
     
     for var i = 0; i < len; i++ {
         for var j = i; j > 0; j-- {
             if (list[j] < list[j - 1]) {
-                let temp = list[j]
-                list[j] = list[j - 1]
-                list[j - 1] = temp
+                exchange(&list, j, j - 1)
+                println(list)
             } else {
                 break
             }

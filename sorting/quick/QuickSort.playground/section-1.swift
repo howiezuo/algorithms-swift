@@ -2,13 +2,13 @@
 
 import UIKit
 
-func exchange(inout list: [String], a: Int, b: Int) {
+func exchange(inout list: [Int], a: Int, b: Int) {
     var temp = list[a]
     list[a] = list[b]
     list[b] = temp
 }
 
-func partition(inout list: [String], low: Int, high: Int) -> Int {
+func partition(inout list: [Int], low: Int, high: Int) -> Int {
     var i = low + 1;
     var j = high;
     let v = list[low]
@@ -27,17 +27,19 @@ func partition(inout list: [String], low: Int, high: Int) -> Int {
         
         if (i < j) {
             exchange(&list, i, j)
+            println(list)
         } else {
             break
         }
     }
     
     exchange(&list, low, j)
+    println(list)
 
     return j
 }
 
-func sort(inout list: [String], low: Int, high: Int) {
+func sort(inout list: [Int], low: Int, high: Int) {
     if ( high <= low) {
         return
     }
@@ -46,8 +48,8 @@ func sort(inout list: [String], low: Int, high: Int) {
     sort(&list, j + 1, high)
 }
 
-var list = ["Q", "U", "I", "C", "K", "S", "O", "R", "T", "E", "X", "A", "M", "P", "L", "E"]
-//var list = [72, 6, 57, 88, 60, 42, 83, 73, 48, 85]
+//var list = ["Q", "U", "I", "C", "K", "S", "O", "R", "T", "E", "X", "A", "M", "P", "L", "E"]
+var list = [72, 6, 57, 88, 60, 42, 83, 73, 48, 85]
 println(list)
 sort(&list, 0, list.count - 1)
 println(list)

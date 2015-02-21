@@ -2,33 +2,43 @@
 
 import UIKit
 
-func merge(inout list: [String], low: Int, mid: Int, hig: Int) {
+func merge(inout list: [String], low: Int, middle: Int, high: Int) {
     var temp = list
     var i = low
-    var j = mid + 1
+    var j = middle + 1
     
-    for (var k = low; k <= hig; k++) {
-        if (i > mid) {
-            list[k] = temp[j++]
-        } else if (j > hig) {
-            list[k] = temp[i++]
-        } else if (temp[j] < temp[i]) {
-            list[k] = temp[j++]
+    var k = low
+    while (i <= middle && j <= high) {
+        if (temp[j] < temp[i]) {
+            list[k] = temp[j]
+            j++
         } else {
-            list[k] = temp[i++]
+            list[k] = temp[i]
+            i++
         }
+        k++
+    }
+    
+    while (i <= middle) {
+        list[k] = temp[i]
+        i++
+        k++
+    }
+    while (j <= high) {
+        list[k] = temp[j]
+        j++
+        k++
     }
 }
 
 func sort(inout list: [String], low: Int, high: Int) {
-    if (high <= low) {
-        return
+    if (high > low) {
+        let mid = low + (high - low) / 2
+        
+        sort(&list, low, mid)
+        sort(&list, mid + 1, high)
+        merge(&list, low, mid, high)
     }
-    let mid = low + (high - low) / 2
-    
-    sort(&list, low, mid)
-    sort(&list, mid + 1, high)
-    merge(&list, low, mid, high)
 }
 
 var list = ["M", "E", "R", "G", "E", "S", "O", "R", "T", "E", "X", "A", "M", "P", "L", "E"]

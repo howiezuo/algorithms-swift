@@ -2,6 +2,12 @@
 
 import UIKit
 
+func exchange(inout list:[String], i: Int, j: Int) {
+    var temp = list[i]
+    list[i] = list[j]
+    list[j] = temp
+}
+
 func sort(inout list:[String]) {
     let len = list.count
     
@@ -12,9 +18,7 @@ func sort(inout list:[String]) {
                 min = j
             }
         }
-        var temp = list[i]
-        list[i] = list[min]
-        list[min] = temp
+        exchange(&list, i, min)
         println(list)
     }
 }
